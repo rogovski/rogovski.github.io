@@ -224,11 +224,166 @@
         $f_x(x,y) = (e^{1 - x^2 - y^2})(x)(1 + 2x^2 - 2y^2)$
     </p>
 
+    <p>This function has second partials: </p>
+
+    <p class="eq">
+        $\begin{align*}
+
+        f_{xx}(x,y) &= -e^{1-x^2-y^2} (3 + 4x^4 + 2y^2 - 4x^2 ( 3 + y^2 ) )\\
+        f_{yy}(x,y) &= e^{1-x^2-y^2} (1-8 y^2+4 y^4+x^2 (2-4 y^2))\\
+        f_{xy}(x,y) &= -2 e^{1-x^2-y^2} x y (-1+2 x^2-2 y^2)\\
+
+        \end{align*}$
+    </p>
+
+    <div class="highlight">
+        <pre>
+            <code class="language-python" data-lang="python">
+
+import sympy as s
+
+x, y = s.symbols('x y')
+
+expr_f = (0.5 - x ** 2 + y ** 2) * (s.exp( 1 - x**2 - y**2 ))
+
+expr_fx = s.diff(expr_f, x)
+expr_fy = s.diff(expr_f, y)
+expr_fxx = s.diff(expr_fx, x)
+expr_fyy = s.diff(expr_fy, y)
+expr_fxy = s.diff(expr_fx, y)
+
+def EvalAt(a,b):
+    return expr_f.subs(x,a).subs(y,b)
+
+def Eval_fxx(a,b):
+    return expr_fxx.subs(x,a).subs(y,b)
+
+def SecondPartialTest(a,b):
+    prodLeft = (expr_fxx.subs(x,a)).subs(y,b)
+    prodRight = (expr_fyy.subs(x,a)).subs(y,b)
+    subtractRight = ((expr_fxy.subs(x,a)).subs(y,b)) ** 2
+    return prodRight*prodLeft - subtractRight
+
+def spt(a,b):
+    prodLeft = (expr_fxx.subs(x,a)).subs(y,b)
+    prodRight = (expr_fyy.subs(x,a)).subs(y,b)
+    subtractRight = ((expr_fxy.subs(x,a)).subs(y,b)) ** 2
+    dVal = prodRight*prodLeft - subtractRight
+
+    if (dVal.evalf() == 0):
+        return "Inconclusive at (" + str(a) + ", " + str(b) + ")"
+
+    elif ( dVal.evalf() < 0 ):
+        return "Saddle Point at (" + str(a) + ", " + str(b) + ")"
+
+    elif ( dVal.evalf() > 0 and prodLeft.evalf() > 0 ):
+        return "Relative Minimum at (" + str(a) + ", " + str(b) + ")"
+
+    elif ( dVal.evalf() > 0 and prodLeft.evalf() < 0 ):
+        return "Relative Maximum at (" + str(a) + ", " + str(b) + ")"
+
+    else:
+        return "unreachable"
+
+
+            </code>
+        </pre>
+    </div>
+
+    <p>OUTPUT</p>
+    <div class="highlight">
+        <pre>
+            <code class="language-python" data-lang="python">
+
+##############################################
+## at (0,0) ##################################
+##############################################
+In [91]: SecondPartialTest(0,0)
+Out[91]: -3.0*exp(2)
+
+In [92]: EvalAt(0,0)
+Out[92]: 0.5*E
+
+In [125]: spt(0,0)
+Out[125]: 'Saddle Point at (0, 0)'
+
+
+##############################################
+## at ( 0, 1 / sqrt(2) ) #####################
+##############################################
+In [93]: SecondPartialTest( 0, 1 / s.sqrt(2) )
+Out[93]: 8.0*E
+
+In [109]: Eval_fxx( 0, 1 / s.sqrt(2) )
+Out[109]: -4.0*exp(1/2)
+
+In [94]: EvalAt( 0, 1 / s.sqrt(2) )
+Out[94]: 1.0*exp(1/2)
+
+In [126]: spt( 0, 1 / s.sqrt(2) )
+Out[126]: 'Relative Maximum at (0, sqrt(2)/2)'
+
+
+##############################################
+## at ( 0, - 1 / sqrt(2) ) ###################
+##############################################
+In [95]: SecondPartialTest( 0, - 1 / s.sqrt(2) )
+Out[95]: 8.0*E
+
+In [110]: Eval_fxx( 0, - 1 / s.sqrt(2) )
+Out[110]: -4.0*exp(1/2)
+
+In [96]: EvalAt( 0, - 1 / s.sqrt(2) )
+Out[96]: 1.0*exp(1/2)
+
+In [127]: spt( 0, - 1 / s.sqrt(2) )
+Out[127]: 'Relative Maximum at (0, -sqrt(2)/2)'
+
+##############################################
+## at ( - s.sqrt(3) / s.sqrt(2), 0 ) #########
+##############################################
+In [103]: SecondPartialTest( - s.sqrt(3) / s.sqrt(2), 0 )
+Out[103]: 24.0*exp(-1)
+
+In [111]: Eval_fxx( - s.sqrt(3) / s.sqrt(2), 0 )
+Out[111]: 6.0*exp(-1/2)
+
+In [101]: EvalAt( - s.sqrt(3) / s.sqrt(2), 0 )
+Out[101]: -1.0*exp(-1/2)
+
+In [128]: spt( - s.sqrt(3) / s.sqrt(2), 0 )
+Out[128]: 'Relative Minimum at (-sqrt(6)/2, 0)'
+
+##############################################
+## at ( s.sqrt(3) / s.sqrt(2), 0 ) ###########
+##############################################
+In [104]: SecondPartialTest( s.sqrt(3) / s.sqrt(2), 0 )
+Out[104]: 24.0*exp(-1)
+
+In [112]: Eval_fxx( s.sqrt(3) / s.sqrt(2), 0 )
+Out[112]: 6.0*exp(-1/2)
+
+In [102]: EvalAt( s.sqrt(3) / s.sqrt(2), 0 )
+Out[102]: -1.0*exp(-1/2)
+
+In [129]: spt( s.sqrt(3) / s.sqrt(2), 0 )
+Out[129]: 'Relative Minimum at (sqrt(6)/2, 0)'
+
+            </code>
+        </pre>
+    </div>
+
     <img src="../../images/interesting_problem.PNG">
     <img src="../../images/interesting_problem_contour.PNG">
 
     <p>
         $\mathbf{x}_{n+1} = \mathbf{x}_{n} - \gamma_{n}\nabla f(\mathbf{x}_n), n \geq 0$
+    </p>
+
+    <p>
+        $\begin{align*}
+        - 2 x (- x^{2} + y^{2} + 0.5) e^{- x^{2} - y^{2} + 1} - 2 x e^{- x^{2} - y^{2} + 1}
+        \end{align*}$
     </p>
 
 
@@ -245,19 +400,90 @@
 
 
 
+
 <!--
 
-wa checks
 
-e^(1-x^2-y^2) x (-3+2 x^2-2 y^2)
-e^(1-x^2-y^2) y (1+2 x^2-2 y^2)
 
-e^(1-x^2-y^2) x (-3+2 x^2-2 y^2) where x = 0, y = 1/sqrt(2)
-e^(1-x^2-y^2) y (1+2 x^2-2 y^2) where x = 0, y = 1/sqrt(2)
 
-e^(1-x^2-y^2)  (1/2 - x^2 + y^2) where x = 5, y = 5
-e^(1-x^2-y^2)  (1/2 - x^2 + y^2) where x = 0, y = 1/sqrt(2)
-e^(1-x^2-y^2)  (1/2 - x^2 + y^2) where x = 0, y = -1/sqrt(2)
+
+
+
+
+##############################################
+## at (0,0) ##################################
+##############################################
+In [91]: SecondPartialTest(0,0)
+Out[91]: -3.0*exp(2)
+
+In [92]: EvalAt(0,0)
+Out[92]: 0.5*E
+
+In [125]: spt(0,0)
+Out[125]: 'Saddle Point at (0, 0)'
+
+
+##############################################
+## at ( 0, 1 / sqrt(2) ) #####################
+##############################################
+In [93]: SecondPartialTest( 0, 1 / s.sqrt(2) )
+Out[93]: 8.0*E
+
+In [109]: Eval_fxx( 0, 1 / s.sqrt(2) )
+Out[109]: -4.0*exp(1/2)
+
+In [94]: EvalAt( 0, 1 / s.sqrt(2) )
+Out[94]: 1.0*exp(1/2)
+
+In [126]: spt( 0, 1 / s.sqrt(2) )
+Out[126]: 'Relative Maximum at (0, sqrt(2)/2)'
+
+
+##############################################
+## at ( 0, - 1 / sqrt(2) ) ###################
+##############################################
+In [95]: SecondPartialTest( 0, - 1 / s.sqrt(2) )
+Out[95]: 8.0*E
+
+In [110]: Eval_fxx( 0, - 1 / s.sqrt(2) )
+Out[110]: -4.0*exp(1/2)
+
+In [96]: EvalAt( 0, - 1 / s.sqrt(2) )
+Out[96]: 1.0*exp(1/2)
+
+In [127]: spt( 0, - 1 / s.sqrt(2) )
+Out[127]: 'Relative Maximum at (0, -sqrt(2)/2)'
+
+##############################################
+## at ( - s.sqrt(3) / s.sqrt(2), 0 ) #########
+##############################################
+In [103]: SecondPartialTest( - s.sqrt(3) / s.sqrt(2), 0 )
+Out[103]: 24.0*exp(-1)
+
+In [111]: Eval_fxx( - s.sqrt(3) / s.sqrt(2), 0 )
+Out[111]: 6.0*exp(-1/2)
+
+In [101]: EvalAt( - s.sqrt(3) / s.sqrt(2), 0 )
+Out[101]: -1.0*exp(-1/2)
+
+In [128]: spt( - s.sqrt(3) / s.sqrt(2), 0 )
+Out[128]: 'Relative Minimum at (-sqrt(6)/2, 0)'
+
+##############################################
+## at ( s.sqrt(3) / s.sqrt(2), 0 ) ###########
+##############################################
+In [104]: SecondPartialTest( s.sqrt(3) / s.sqrt(2), 0 )
+Out[104]: 24.0*exp(-1)
+
+In [112]: Eval_fxx( s.sqrt(3) / s.sqrt(2), 0 )
+Out[112]: 6.0*exp(-1/2)
+
+In [102]: EvalAt( s.sqrt(3) / s.sqrt(2), 0 )
+Out[102]: -1.0*exp(-1/2)
+
+In [129]: spt( s.sqrt(3) / s.sqrt(2), 0 )
+Out[129]: 'Relative Minimum at (sqrt(6)/2, 0)'
+
 
 -->
 
