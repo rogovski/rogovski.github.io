@@ -60,10 +60,6 @@
         Solving $4x + 8 = 0$ for $x$ and $2y + 6 = 0$ for $y$ yields $(-2,3)$
     </p>
 
-    <p> question about first partials if f_x contains a y term and f_y contains an x term
-        are we solving a system of equations then?
-    </p>
-
     <p>When performing a second partials test on $f$ we must first ensure that
         condition #1 of DEF 2 is satisfied. Since we did this (see above) we
         can use $f_{xx} = 4$, $f_{yy} = 2$, and $f_{xy} = 0$ in the following expression:
@@ -110,7 +106,7 @@
 
     <p>
         Using $(0,0)$ as the only critical point, we need to reason whether it is a
-        maximum of minimum using DEF 1. There are two cases to consider. First is the
+        maximum or minimum using DEF 1. There are two cases to consider. First is the
         test for a relative minimum:
     </p>
 
@@ -141,16 +137,91 @@
     </p>
 
 
+    <!-- ********************************************************** -->
+    <!-- ********************************************************** -->
 
+    <h2>Example 3</h2>
+
+    <p>Determine the relative extrema of</p>
+
+    <p class="eq">
+        $f(x,y) = -x^3 + 4xy - 2y^2 + 1$
+    </p>
+
+    <p>This function has partials: </p>
+
+    <p class="eq">
+        $f_x(x,y) = -3x^2 + 4y$
+    </p>
+
+    <p>and</p>
+
+    <p class="eq">
+        $f_x(x,y) = 4x - 4y$
+    </p>
+
+    <p>since the first partials are defined at every point, the only critical points of f
+        are those which satisfy
+    </p>
+
+    <p class="eq">
+        $-3x^2 + 4y = 0$ and $4x - 4y = 0$
+    </p>
+
+    <p>the second equation can be transformed into $x = y$. It can then be substituted back
+        into the first equation in two differenet ways.
+    </p>
+
+    <p class="eq">
+        $\begin{align*}
+        x = &y\\
+        -3x^2 + 4(x) = &0 \quad {\small{(x\:substituted\:for\:y)}}\\
+        \end{align*}$
+    </p>
+
+    <p>this results in $x = y$ and $(x)(-3x + 4) = 0$, which gives us two critial points defined
+        by $x = y, x = 0$ and $x = y, x = \frac{4}{3}$. We can also substitute back
+        into the first equation in terms of $y$:
+    </p>
+
+    <p class="eq">
+        $\begin{align*}
+        x = &y\\
+        -3(y)^2 + 4y = &0 \quad {\small{(y\:substituted\:for\:x)}}\\
+        \end{align*}$
+    </p>
+
+    <p>Doing so, however, yields no new information (note: trying everypossible substitution
+        is important - see <a href="#interesting">'An Interesting Exercise'</a>).
+        The second partials needed in order to test our critical points: </p>
+
+    <p class="eq">$f_{xx} = -6x$, $f_{yy} = -4$, and $f_{xy} = 4$</p>
+
+    <p>the $d$ value for $(0,0)$ is $-16$ which indicates that $f(0,0)$ is a saddle point.
+        the $d$ value for $(\frac{4}{3}, \frac{4}{3})$ is $16$ indicating that
+        $f(\frac{4}{3}, \frac{4}{3})$ is a relative maximum.
+    </p>
     <!-- ********************************************************** -->
     <!-- ********************************************************** -->
 
 
-    <h2>An Interesting Exercise</h2>
+    <h2 id="interesting">An Interesting Exercise</h2>
     <p>examine the function.</p>
 
     <p class="eq">
-        $z = (\frac{1}{2} + x^2 + y^2)e^{1 - x^2 - y^2}$
+        $f(x,y) = (\frac{1}{2} + x^2 + y^2)e^{1 - x^2 - y^2}$
+    </p>
+
+    <p>This function has partials: </p>
+
+    <p class="eq">
+        $f_x(x,y) = (e^{1 - x^2 - y^2})(x)(-3 + 2x^2 - 2y^2)$
+    </p>
+
+    <p>and</p>
+
+    <p class="eq">
+        $f_x(x,y) = (e^{1 - x^2 - y^2})(x)(1 + 2x^2 - 2y^2)$
     </p>
 
     <img src="../../images/interesting_problem.PNG">
@@ -159,11 +230,36 @@
     <p>
         $\mathbf{x}_{n+1} = \mathbf{x}_{n} - \gamma_{n}\nabla f(\mathbf{x}_n), n \geq 0$
     </p>
+
+
+    <h2>Definitions</h2>
+
+    <h3>DEF 1 - Relative Extrema</h3>
+    <h3>DEF 2 - Critical Point</h3>
+
+    <h2>Theorems</h2>
+
+    <h3>THEOREM 13.17 - Second Partials Test</h3>
+
 </div>
 
 
 
+<!--
 
+wa checks
+
+e^(1-x^2-y^2) x (-3+2 x^2-2 y^2)
+e^(1-x^2-y^2) y (1+2 x^2-2 y^2)
+
+e^(1-x^2-y^2) x (-3+2 x^2-2 y^2) where x = 0, y = 1/sqrt(2)
+e^(1-x^2-y^2) y (1+2 x^2-2 y^2) where x = 0, y = 1/sqrt(2)
+
+e^(1-x^2-y^2)  (1/2 - x^2 + y^2) where x = 5, y = 5
+e^(1-x^2-y^2)  (1/2 - x^2 + y^2) where x = 0, y = 1/sqrt(2)
+e^(1-x^2-y^2)  (1/2 - x^2 + y^2) where x = 0, y = -1/sqrt(2)
+
+-->
 
 </div>
 </div>
