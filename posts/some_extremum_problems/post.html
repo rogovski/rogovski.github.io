@@ -19,6 +19,9 @@
 
     <style>
     .eq{ text-align: center; }
+    @media print {
+        .breaker {page-break-after: always;}
+    }
     </style>
 </head>
 <body>
@@ -73,7 +76,7 @@
         $f$ has a relative minimum at $(-2,3)$
     </p>
 
-
+    <div class="breaker"></div>
     <!-- ********************************************************** -->
     <!-- ********************************************************** -->
 
@@ -137,6 +140,7 @@
     </p>
 
 
+    <div class="breaker"></div>
     <!-- ********************************************************** -->
     <!-- ********************************************************** -->
 
@@ -201,6 +205,8 @@
         the $d$ value for $(\frac{4}{3}, \frac{4}{3})$ is $16$ indicating that
         $f(\frac{4}{3}, \frac{4}{3})$ is a relative maximum.
     </p>
+
+    <div class="breaker"></div>
     <!-- ********************************************************** -->
     <!-- ********************************************************** -->
 
@@ -236,6 +242,9 @@
         \end{align*}$
     </p>
 
+    <div class="breaker"></div>
+
+    <p>CODE</p>
     <div class="highlight">
         <pre>
             <code class="language-python" data-lang="python">
@@ -290,6 +299,7 @@ def spt(a,b):
         </pre>
     </div>
 
+    <div class="breaker"></div>
     <p>OUTPUT</p>
     <div class="highlight">
         <pre>
@@ -372,19 +382,18 @@ Out[129]: 'Relative Minimum at (sqrt(6)/2, 0)'
             </code>
         </pre>
     </div>
+    <div class="breaker"></div>
 
-    <img src="../../images/interesting_problem.PNG">
-    <img src="../../images/interesting_problem_contour.PNG">
+    <img width="100%" src="../../images/interesting_problem.PNG">
+    <div class="breaker"></div>
 
+    <img width="100%" src="../../images/interesting_problem_contour.PNG">
+    <div class="breaker"></div>
+<!--
     <p>
         $\mathbf{x}_{n+1} = \mathbf{x}_{n} - \gamma_{n}\nabla f(\mathbf{x}_n), n \geq 0$
     </p>
-
-    <p>
-        $\begin{align*}
-        - 2 x (- x^{2} + y^{2} + 0.5) e^{- x^{2} - y^{2} + 1} - 2 x e^{- x^{2} - y^{2} + 1}
-        \end{align*}$
-    </p>
+-->
 
 
     <h2>Definitions</h2>
