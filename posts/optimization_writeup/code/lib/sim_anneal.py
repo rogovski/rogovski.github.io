@@ -57,6 +57,9 @@ def InitTempAndState(config, f):
         bestValueAtPoint = None
         bestPoint = None
 
+        # pick 50 points at random, find min and max function values
+        # at those points. the initial temperature becomes 1.5 times
+        # the difference of the min and max values
         for _ in range(50):
 
             point = np.random.uniform(size=2) * ( config.maxDomain - config.minDomain ) + config.minDomain
@@ -83,13 +86,17 @@ def SimAnneal(config, f):
     currentState = initialGuess;
     currentStateEnergy = f(initialGuess)
 
-    # keeps track of the best (most minimum) state
+    # keeps track of the best (e.g. most minimum) state
     bestState = initialGuess;
     bestStateEnergy = f(initialGuess)
 
     temp = initialTemp
 
+    # time starts at 0
     iterations = 0
+
+    # instead of getting one neighbor per cooldown step,
+    # we generate 200 per cooldown step
     localSearchStep = 200
 
     while iterations < config.maxIterations:
