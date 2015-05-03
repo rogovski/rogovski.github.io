@@ -1,0 +1,337 @@
+<html>
+<head>
+    <title>some extremum problems</title>
+
+    <link rel="stylesheet"href="../../css/main.css">
+
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'>
+    </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true
+            },
+            displayAlign: "center"
+        });
+    </script>
+
+    <style>
+    .eq{ text-align: center; }
+    @media print {
+        .breaker {page-break-after: always;}
+    }
+    </style>
+</head>
+<body>
+<div class="page-content">
+<div class="wrap">
+<div class="post">
+
+
+
+
+<div class="post-header"></div>
+
+<div class="post-content">
+
+
+
+<h4>Introduction</h4>
+<p>
+Optimization, in general, is the process of finding the "best" or "worst" values of a function.
+The notion of the 'best' or 'worst' value of a function varies depending on the function we are examining.
+The function that we try to optimize is often refered to as the 'objective' function.
+</p>
+
+<p>
+In the context of this writup, the objective functions we will be dealing with have type $\Re^2 \to \Re$.
+That is, they take two real numbers as arguments, and return one real number as their result.
+In calculus 3 paralance, functions of this type define a scalar field.
+They associate a real number to every point in space and can be visualized as a surface.
+</p>
+
+<p>
+optimizing a function $f:\Re^2 \to \Re$ requires us to define what we mean when we talk about the
+'best' or 'worst' values of $f$.
+</p>
+
+
+
+<h4>Definitions</h4>
+
+<strong>Relative Extrema:</strong> forall $(x,y)$ in an open disk containing $(x_0,y_0)$
+<ul>
+    <li>
+        If $f(x,y) \geq f(x_0,y_0)$,
+        then $f$ has a relative minimum at $(x_0,y_0)$
+    </li>
+    <li>
+        If $f(x,y) \leq f(x_0,y_0)$,
+        then $f$ has a relative maximum at $(x_0,y_0)$
+    </li>
+</ul>
+
+<strong>Absolute Extrema:</strong>
+Let $f$ be some real valued function defined on domain %D% and let $(x,y) \in D$
+<ul>
+    <li>
+        If $\forall (x,y) \in D, f(x,y) \geq f(x_0,y_0)$,
+        then $f$ has a relative minimum at $(x_0,y_0)$
+    </li>
+    <li>
+        If $\forall (x,y) \in D, f(x,y) \leq f(x_0,y_0)$,
+        then $f$ has a relative maximum at $(x_0,y_0)$
+    </li>
+</ul>
+
+<p>
+
+</p>
+
+
+
+<h4>Clarification of Terms</h4>
+<strong>Note:</strong> For the rest of this writeup we assume the following:
+<ul>
+
+    <li>all objective functions are of the form: $f:\Re^2 \to \Re$</li>
+
+    <li>
+        when we talk about optimizing $f$ we are refering to the specific case of finding the
+        <em>absolute minimum</em> of $f$ accross some subset of the domain $\Re^2$
+    </li>
+
+</ul>
+
+<p>
+    todo: what is an algorithm (state, iteration).
+
+    the state of an algorithm at a particular iteration vs. the state of some pysical system at a paricular time
+</p>
+
+
+<h4>Gradient Descent</h4>
+<p>
+    One property of the gradient of a function $f$ is as follows: the <em>maximum descrease</em> of $f$ is given by
+    $-\nabla f(x,y)$. Given this property, the algorithm for gradient descent follows naturally.
+</p>
+
+<p class="eq">
+    $\mathbf{x}_{n+1} = \mathbf{x}_{n} - \gamma_{n}\nabla f(\mathbf{x}_n), n \geq 0$
+</p>
+
+<p>
+    This basically says: "given your current point, find a point that is lower than it. repeat until
+    you can't go any lower." The $\gamma_{n}$ term is there to scale the gradient vector. it allows the
+    algorithm to cover more ground per iteration. In python, the core part of the algorithm is as follows:
+</p>
+
+
+    <div class="highlight">
+        <pre>
+            <code class="language-python" data-lang="python">
+
+    # one iteration of gradient descent
+    def Next(self, step):
+
+        # evaluate the gradinant at the current point
+        gradAtPoint = self.atPoint(self.currentIterValue)
+
+        # the new current point becomes the old current point
+        # minus the gradient (at the point) times some scale factor
+        self.currentIterValue = self.currentIterValue - (step * gradAtPoint)
+
+        return self.currentIterValue
+
+            </code>
+        </pre>
+    </div>
+
+
+<p>
+Gradient descent can be classified as a <em>greedy</em> algorithm. Given the algorithm's current state
+(a point $(x,y)$ in space), it <em>only</em> transitions to points that are lower
+in space. this tactic, however, leads to issues when dealing with a function
+like the following:
+</p>
+
+<img width="100%" src="../../images/ackley_two.PNG">
+
+
+<p>
+    Notice how many local extrema this function contains. If we try to run gradient descent on this function, any initial point we pick that is not in a small neighborhood around the origin will settle into one of the blue valleys. the algorithm tends to get 'stuck' in local minima.
+</p>
+
+<img width="100%" src="../../images/LocalMin.jpg">
+
+
+
+<h4>Simulated Annealing</h4>
+<p>
+    Simulated annealing compensates for the problems of gradient descent by allowing its algorithm to
+    transition to new states based on some probability. In fact, the probabilistic components of this
+    algorithm allow it to transition
+</p>
+
+in order to implement a simulated annealing algorithm, we need the following compontents:
+<ul>
+
+        <li>a system and its possible states.</li>
+        <li>the energy of a state.</li>
+        <li>the temperature of the system.</li>
+        <li>a way to describe how the system cools down.</li>
+        <li>a way to describe how the system transisitons from one state to another.</li>
+
+</ul>
+
+<p>
+the algorithm proceeds as follows:
+</p>
+
+<!-- STEP 1 -->
+<div class="highlight">
+    <pre><code class="language-python" data-lang="python">(1) pick an initial state, and an initial tempurature</code></pre>
+</div>
+
+<p>
+
+</p>
+
+
+
+<!-- STEP 2 -->
+<div class="highlight">
+    <pre><code class="language-python" data-lang="python">(2a) initialize variable to hold current state, set it with initial state
+(2b) initialize variable to hold current tempurature, set it with initial temperature</code></pre>
+</div>
+
+
+
+<!-- STEP 3 -->
+<div class="highlight">
+    <pre><code class="language-python" data-lang="python">(3) iterate</code></pre>
+</div>
+
+<p>
+    it is generally left up to the user to specify the maximum number of iterations of the algorithm.
+</p>
+
+
+
+<!-- STEP 4 -->
+<div class="highlight">
+    <pre><code class="language-python" data-lang="python">(4) pick a neighbor of the current state</code></pre>
+</div>
+
+how this neighbor is picked depends on on three factors
+<ul>
+        <li>the current state</li>
+        <li>the temperature of the system</li>
+        <li>a value drawn from some probability distribution</li>
+</ul>
+
+
+<!-- STEP 5 -->
+<div class="highlight">
+    <pre><code class="language-python" data-lang="python">(5) decide whether to:
+        the keep the current state, or
+        make the neighbor state from step (4) the new current state.</code></pre>
+</div>
+
+
+deciding whether to transition to a new state depends on four factors.
+<ul>
+    <li>the enegy of the current state</li>
+    <li>the enegy of the new state</li>
+    <li>the current temperature of the system</li>
+    <li>some value drawn from a uniform probability distribution between 0 and 1</li>
+</ul>
+
+<p>
+We define a function $Acceptance(e,e',T)$.
+$e$ and $e'$ represent the <em>energies</em> of the current state $s$ and the new prospect state $s'$.
+in the context of the optimization problems we are concerned with
+</p>
+
+<p class="eq">
+$Acceptance(e,e',T) = Acceptance(f(x_{current}, y_{current}), f(x_{neighbor}, y_{neighbor}),T)$
+</p>
+
+<p>
+This function returns the probability of transitioning from the current state to the prospective new state
+selected by step (4). The most important part of the algorithm occures here. If the neighboring state is better
+(e.g. when it is applied to $f$, it produces a value that is 'less than', 'more minimum' than the current state),
+the probability of transitioning to the new state is 1 (100%).
+If the neighbor is worse than the current state, the function <em>produces a
+probability that is proportional to the current temperature</em>. As the temperature approaches zero, the
+probability of transitioning to a worse state approaches zero. This amounts to saying that when the system
+is 'hot' the probability of transitioning to a new, non optimal state is relatively higher than it would be
+in a 'cool' system. Recall from previous sections that the gradient descent algorithm <em>only</em> chose
+neighboring states that were more optimal. In contrast, simulated annealing might choose a new, non optimal
+state that will allow it (in subsequent iterations) to find a <em>more</em> optimal state. In intuitive terms,
+the algorithm is allowed to 'jump' out of a valley into a possibly deeper, more optimal valley. The intensity
+with which it 'jumps' is proportional to the temperature.
+</p>
+
+<!-- STEP 6 -->
+<div class="highlight">
+    <pre><code class="language-python" data-lang="python">(5) set a new tempurature. goto (3)</code></pre>
+</div>
+
+determining the temperature to set for a new iteration depends on two factors.
+<ul>
+    <li>the initial temperature</li>
+    <li>the current iteration number</li>
+</ul>
+
+<p>In our implementation we set the new temperature by multiplying the inverse of the natural logarithm of
+    the current iteration number by the initial temperature. this serves to model the 'cooling' of the system
+    as a function of time (the iteration number). As time increases, the temperature of the system decreases.
+</p>
+
+
+<h4>Simulated Annealing - Python</h4>
+
+
+<p>
+
+interpreting simulated annealing in the context of optimizing $f:\Re^2 \to \Re$
+
+the system and its its possible states.
+
+here the 'system' is just the domain of $f$. the 'states' of the system are just elements
+of the domain (e.g. tuples of real numbers).
+
+
+
+the energy of a state.
+
+the energy function $E$ is the objective function $f$.
+the energy of a a state is its value when applyed to $E$. $e_0 = E(s_0) = f(x_0,y_0)$
+
+
+
+the temperature of the system and how it cools down.
+
+the temperature of
+
+
+picking an initial temperature
+
+
+describing how the system cools
+</p>
+
+
+
+</div>
+
+
+
+</div>
+</div>
+</div>
+</body>
+</html>
