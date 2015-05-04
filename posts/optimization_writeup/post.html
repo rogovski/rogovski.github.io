@@ -42,20 +42,21 @@
 <p>
 Optimization, in general, is the process of finding the "best" or "worst" values of a function.
 The notion of the 'best' or 'worst' value of a function varies depending on the function we are examining.
-The function that we try to optimize is often refered to as the 'objective' function.
+The function that we try to optimize is often referred to as the 'objective' function.
 </p>
 
 <p>
-In the context of this writup, the objective functions we will be dealing with have type $\Re^2 \to \Re$.
+In the context of this write up, the objective functions we will be dealing with have type $\Re^2 \to \Re$.
 That is, they take two real numbers as arguments, and return one real number as their result.
-In calculus 3 paralance, functions of this type define a scalar field.
+In calculus 3 parlance, functions of this type define a scalar field.
 They associate a real number to every point in space and can be visualized as a surface.
 </p>
 
 <p>
-optimizing a function $f:\Re^2 \to \Re$ requires us to define what we mean when we talk about the
+Optimizing a function $f:\Re^2 \to \Re$ requires us to define what we mean when we talk about the
 'best' or 'worst' values of $f$.
 </p>
+
 
 
 
@@ -93,22 +94,23 @@ Let $f$ be some real valued function defined on domain $D$ and let $(x,y) \in D$
 
 
 <h4>Clarification of Terms</h4>
-<strong>Note:</strong> For the rest of this writeup we assume the following:
+<strong>Note:</strong> For the rest of this write up we assume the following:
 <ul>
 
     <li>all objective functions are of the form: $f:\Re^2 \to \Re$</li>
 
     <li>
-        when we talk about optimizing $f$ we are refering to the specific case of finding the
-        <em>absolute minimum</em> of $f$ accross some subset of the domain $\Re^2$
+        when we talk about optimizing $f$ we are referring to the specific case of finding the
+        <em>absolute minimum</em> of $f$ across some subset of the domain $\Re^2$
     </li>
 
 </ul>
 
 <p>
-    todo: the words algorithm, state, and iteration are used alot. should I define them? <br />
-    todo: there is a bit a nomencalure clash between the state of an algorithm at a particular iteration vs. the state of some pysical system at a paricular time. probably should clarify this.
+    todo: the words algorithm, state, and iteration are used a lot. should I define them? <br />
+    todo: there is a bit a nomenclature clash between the state of an algorithm at a particular iteration vs. the state of some physical system at a particular time. probably should clarify this.
 </p>
+
 
 <h4>
     Multivariable Second Partial Derivative Test
@@ -137,7 +139,7 @@ Let $f$ be some real valued function defined on domain $D$ and let $(x,y) \in D$
     </a>
 </h4>
 <p>
-    One property of the gradient of a function $f$ is as follows: the <em>maximum descrease</em> of $f$ is given by
+    One property of the gradient of a function $f$ is as follows: the <em>maximum decrease</em> of $f$ is given by
     $-\nabla f(x,y)$. Given this property, the algorithm for gradient descent follows naturally.
 </p>
 
@@ -146,7 +148,7 @@ Let $f$ be some real valued function defined on domain $D$ and let $(x,y) \in D$
 </p>
 
 <p>
-    This basically says: "given your current point, find a point that is lower than it. repeat until
+    This basically says: "Given your current point, find a point that is lower than it. Repeat until
     you can't go any lower." The $\gamma_{n}$ term is there to scale the gradient vector. it allows the
     algorithm to cover more ground per iteration. In python, the core part of the algorithm is as follows:
 </p>
@@ -176,7 +178,7 @@ Let $f$ be some real valued function defined on domain $D$ and let $(x,y) \in D$
 <p>
 Gradient descent can be classified as a <em>greedy</em> algorithm. Given the algorithm's current state
 (a point $(x,y)$ in space), it <em>only</em> transitions to points that are lower
-in space. this tactic, however, leads to issues when dealing with a function
+in space. This tactic, however, leads to issues when dealing with a function
 like the following:
 </p>
 
@@ -184,7 +186,7 @@ like the following:
 
 
 <p>
-    Notice how many local extrema this function contains. If we try to run gradient descent on this function, any initial point we pick that is not in a small neighborhood around the origin will settle into one of the blue valleys. the algorithm tends to get 'stuck' in local minima.
+   Notice how many local extrema this function contains. If we try to run gradient descent on this function, any initial point we pick that is not in a small neighborhood around the origin will settle into one of the blue valleys. The algorithm tends to get 'stuck' in local minima.
 </p>
 
 <img width="100%" src="../../images/LocalMin.jpg">
@@ -203,14 +205,14 @@ like the following:
     algorithm allow it to transition
 </p>
 
-in order to implement a simulated annealing algorithm, we need the following compontents:
+in order to implement a simulated annealing algorithm, we need the following components:
 <ul>
 
         <li>a system and its possible states.</li>
         <li>the energy of a state.</li>
         <li>the temperature of the system.</li>
         <li>a way to describe how the system cools down.</li>
-        <li>a way to describe how the system transisitons from one state to another.</li>
+        <li>a way to describe how the system transitions from one state to another.</li>
 
 </ul>
 
@@ -243,7 +245,7 @@ the algorithm proceeds as follows:
 </div>
 
 <p>
-    it is generally left up to the user to specify the maximum number of iterations of the algorithm.
+    It is generally left up to the user to specify the maximum number of iterations of the algorithm.
 </p>
 
 
@@ -253,7 +255,7 @@ the algorithm proceeds as follows:
     <pre><code class="language-python" data-lang="python">(4) pick a neighbor of the current state</code></pre>
 </div>
 
-how the neighbor of a state is picked depends on on three factors
+How the neighbor of a state is picked depends on three factors
 <ul>
         <li>the current state</li>
         <li>the temperature of the system</li>
@@ -313,7 +315,7 @@ with which it 'jumps' is proportional to the temperature.
 
 <!-- STEP 6 -->
 <div class="highlight">
-    <pre><code class="language-python" data-lang="python">(5) set a new tempurature. goto (3)</code></pre>
+    <pre><code class="language-python" data-lang="python">(5) set a new temperature. goto (3)</code></pre>
 </div>
 
 determining the temperature to set for a new iteration depends on two factors.
