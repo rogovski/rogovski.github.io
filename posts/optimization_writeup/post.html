@@ -336,6 +336,53 @@ determining the temperature to set for a new iteration depends on two factors.
     <pre><code class="language-python" data-lang="python">see code/lib/sim_anneal.py</code></pre>
 </div>
 
+<h4 id="running-code">Simulated Annealing - Running The Code</h4>
+
+
+        <a href="https://github.com/rogovski/rogovski.github.io/archive/master.zip">
+            Download The Zip
+        </a>
+
+
+        <p>unpack the zip</p>
+
+    <p>
+        In the terminal, change into the relevent code directory. On linux:
+    </p>
+
+    <div class="highlight">
+        <pre><code class="language-python" data-lang="python">cd downloads/rogovski.github.io-master/posts/optimization_writeup/code/</code></pre>
+    </div>
+
+
+    <p>
+        Start the python shell
+    </p>
+
+
+        <div class="highlight">
+        <pre><code class="language-python" data-lang="python"> $ python
+ >>></code></pre>
+    </div>
+
+    <p>
+        Type the following into the shell
+    </p>
+    <div class="highlight">
+        <pre><code class="language-python" data-lang="python"> >>> execfile('./run_all.py')</code></pre>
+    </div>
+
+    <p>
+        note that this code uses some functions from 'numpy'.
+    </p>
+    <div class="highlight">
+        <pre><code class="language-python" data-lang="python"> >>> runAckleySimAnneal(1000)
+ >>> runSimpleRidgeSimAnneal(1000)
+ >>> runBealeSimAnneal(1000)</code></pre>
+    </div>
+
+</ul>
+
 
 
 </div>
