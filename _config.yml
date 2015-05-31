@@ -12,6 +12,13 @@ url:                 http://rogovski.github.io/
 baseurl:             ''
 paginate:            5
 
+markdown:            redcarpet
+
+redcarpet:
+  extensions:        ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+
+highlighter:         pygments
+
 # About/contact
 author:
   name:              Michael Rogowski
