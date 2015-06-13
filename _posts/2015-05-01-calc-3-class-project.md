@@ -134,7 +134,7 @@ deviation of 1). the image to the lower right represents the square of this
 value (we square it in order to illustrate that the two plots have the same shape
 modulo any noise introduced by that random variable).
 
-![distance function]({{ site.baseurl }}/public/images/2015-05-01-distancefunc.PNG)
+![distance function]({{ site.baseurl }}/public/images/2015-05-01-distancefunc.png)
 
 deciding whether to transition to a new state depends on four factors.
 
