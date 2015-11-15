@@ -28,6 +28,8 @@ nbproject
 *.sublime-project
 *.sublime-workspace
 .idea
+.sass-cache
+.jekyll-metadata
 
 # Komodo
 *.komodoproject
