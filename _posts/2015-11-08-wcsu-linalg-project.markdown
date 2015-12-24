@@ -3,15 +3,23 @@ layout: post
 title:  "WCSU Linear Algebra Project"
 date:   2015-11-08 13:14:00 -0500
 categories: mathematics wcsu
-description: "End of semester project about machine learning."
+description: "End of semester project about pca."
 ---
 
-pattern recognition with supervised learning algorithms.
 
+# Introduction
+In statistical data analysis, Principle Component Analysis (PCA)
 
-Supervised learning is the machine learning task of inferring a function from labeled training data.[1] 
+## Outline
 
+## Algorithms/methods used
+basic terminology
 
+# Main Part
+## mathimatical formulation of problem
+## detailed description of algorithms
+## implemenation
+# Summary / Conclusions
 
-1. Mehryar Mohri, Afshin Rostamizadeh, Ameet Talwalkar (2012) Foundations of Machine Learning, The MIT Press ISBN 9780262018258.
-
+# References
+1. Shlens, J. (2003). A Tutorial on Principal Component Analysis

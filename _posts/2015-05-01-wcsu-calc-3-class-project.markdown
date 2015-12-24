@@ -94,14 +94,14 @@ Given the algorithm's current state (a point $(x,y)$ in space), it <em>only</em>
 transitions to points that are lower in space. this tactic, however,
 leads to issues when dealing with a function like the following:
 
-![ackley's function]({{ site.baseurl }}/images/2015-05-01-ackley.PNG)
+![ackley's function]({{ site.baseurl }}/images/2015-05-01-wcsu-calc-3-class-project/2015-05-01-ackley.PNG)
 
 Notice how many local extrema this function contains. If we try to run gradient descent
 on this function, any initial point we pick that is not in a small neighborhood around
 the origin will settle into one of the blue valleys. the algorithm tends to get 'stuck'
 in local minima.
 
-![local min cartoon]({{ site.baseurl }}/images/2015-05-01-localmin.jpg)
+![local min cartoon]({{ site.baseurl }}/images/2015-05-01-wcsu-calc-3-class-project/2015-05-01-localmin.jpg)
 
 
 ### [Simulated Annealing]({{ site.baseurl }}/code/2015-05-01/lib/sim_anneal.py)
@@ -146,7 +146,7 @@ deviation of 1). the image to the lower right represents the square of this
 value (we square it in order to illustrate that the two plots have the same shape
 modulo any noise introduced by that random variable).
 
-![distance function]({{ site.baseurl }}/images/2015-05-01-distancefunc.png)
+![distance function]({{ site.baseurl }}/images/2015-05-01-wcsu-calc-3-class-project/2015-05-01-distancefunc.png)
 
 deciding whether to transition to a new state depends on four factors.
 
@@ -187,4 +187,4 @@ logarithm of the current iteration number by the initial temperature. this serve
 the 'cooling' of the system as a function of time (the iteration number). As time increases,
 the temperature of the system decreases.
 
-![iterations vs tempurature]({{ site.baseurl }}/images/2015-05-01-itersvstemp.PNG)
+![iterations vs tempurature]({{ site.baseurl }}/images/2015-05-01-wcsu-calc-3-class-project/2015-05-01-itersvstemp.PNG)
