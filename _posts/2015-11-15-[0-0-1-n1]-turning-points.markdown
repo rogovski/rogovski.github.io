@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Polynomials and Turning Points"
+title:  "[0-0-1-n1] Polynomials and Turning Points"
 date:   2015-11-15 13:14:00 -0500
 categories: mathematics basic
 description: "polynomials and their graphs"

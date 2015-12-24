@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "What is Abstraction"
+title:  "[0] Abstraction"
 date:   2015-11-08 13:14:00 -0500
 categories: mathematics basic
 description: "attempt to explain abstraction"

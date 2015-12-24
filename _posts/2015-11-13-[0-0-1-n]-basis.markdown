@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "What is a Basis"
+title:  "[0-0-1-n] Basis"
 date:   2015-11-08 13:14:00 -0500
 categories: mathematics algebra
 description: "attempt to explain what a basis is (a la linear algebra)"
@@ -17,8 +17,10 @@ indexed set $\mathcal{B} = \\{ v_1, ..., v_p \\}$ in $V$ such that:
 It should also be noted that any vector space $V$ is a subspace of itself, therefore,
 in the above definition, we can replace $H$ with $V$.
 
-This definition is appropriate because of its rigor, but what I'm after here is
-a non standard explaination.
+This definition is appropriate because of its rigor. But how can we strengthen
+our intuition about what a basis *is*.
+
+
 
 <div>
 <p>Click the button to get your coordinates.</p>
