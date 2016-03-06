@@ -18,30 +18,6 @@ It should also be noted that any vector space $V$ is a subspace of itself, there
 in the above definition, we can replace $H$ with $V$.
 
 This definition is appropriate because of its rigor. But how can we strengthen
-our intuition about what a basis *is*.
+our intuition about what a basis *is*?
 
-
-
-<div>
-<p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()">Try It</button>
-
-<p id="demo"></p>
-</div>
-
-
-<script>
-var x = document.getElementById("demo");
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude; 
-}
-</script>
+TODO:
