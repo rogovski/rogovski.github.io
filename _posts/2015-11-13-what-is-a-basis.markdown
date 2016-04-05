@@ -21,3 +21,6 @@ This definition is appropriate because of its rigor. But how can we strengthen
 our intuition about what a basis *is*?
 
 TODO:
+
+collection of coordinate systems in R^2
+
