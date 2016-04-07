@@ -45,6 +45,7 @@ cat /proc/sys/net/ipv4/ip_forward
 That should return a 1 now.
 
 set up forwarding from 80 to 8080:
+
 ```bash
 sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
 ```
