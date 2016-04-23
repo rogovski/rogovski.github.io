@@ -6,6 +6,13 @@ categories: infrastructure
 description: "How to setup and configure"
 ---
 
+http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
+http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_delegate-permissions_examples.html
+goto IAM -> create policy -> attach policy to users
+
+ses docs
+http://docs.aws.amazon.com/ses/latest/DeveloperGuide/best-practices-bounces-complaints.html
+
 ### Creating a key pair
 
 ```bash
