@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "AWS IAM"
+date:   2016-04-24 13:14:00 -0500
+categories: infrastructure
+description: "How to setup and configure"
+---
+
+
+The account you create when signing up with AWS is the owner account. 
+It shouldn't be used for day to day operations.
+
+```bash
+chmod 0400 <your-key>.pem
+```

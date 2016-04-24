@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "AWS Node.js SDK"
+date:   2016-04-24 13:14:00 -0500
+categories: infrastructure
+description: "How to setup and configure"
+---
+
+http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-intro.html

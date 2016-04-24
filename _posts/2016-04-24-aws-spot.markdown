@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "AWS IAM"
+date:   2016-04-24 13:14:00 -0500
+categories: infrastructure
+description: "How to setup and configure"
+---
+
+
+https://aws.amazon.com/ec2/spot/
