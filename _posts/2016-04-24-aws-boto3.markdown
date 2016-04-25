@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "AWS Boto3"
+date:   2016-04-24 13:14:00 -0500
+categories: infrastructure
+description: "How to setup and configure"
+---
+
+https://boto3.readthedocs.org/en/latest/
