@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Probability Theory"
-date:   2016-04-24 13:14:00 -0500
+date:   2016-04-28 13:14:00 -0500
 categories: mathematics statistics
 description: "links and sources"
 ---
