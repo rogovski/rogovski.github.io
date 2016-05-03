@@ -81,3 +81,115 @@ uses: key exchange and digital signatures
 
 TODO: get software to perform symmetric encryption.
 TODO: get software to perform asymmetric encryption.
+
+
+http://serverfault.com/questions/9708/what-is-a-pem-file-and-how-does-it-differ-from-other-openssl-generated-key-file
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
+https://datacenteroverlords.com/2012/03/01/creating-your-own-ssl-certificate-authority/
+
+# Generate an RSA keypair with a 2048 bit private key
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+
+
+# Extracting the public key from an RSA keypair
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+
+
+Every digital certificate has a pair of associated cryptographic keys. This pair of keys consists of a private key and a public key. Public/private key pairs are used for asymmetric encryption. Asymmetric encryption is used mainly to encrypt and decrypt session keys and digital signatures.
+
+
+The two main branches of public key cryptography are:
+
+Public key encryption: a message encrypted with a recipient's public key cannot be decrypted by anyone except a possessor of the matching private key—presumably, this will be the owner of that key and the person associated with the public key used. This is used for confidentiality.
+
+Digital signatures: a message signed with a sender's private key can be verified by anyone who has access to the sender's public key, thereby proving that the sender had access to the private key (and therefore is likely to be the person associated with the public key used), and the part of the message that has not been tampered with. On the question of authenticity, see also message digest.
+
+An analogy to public-key encryption is that of a locked mailbox with a mail slot. The mail slot is exposed and accessible to the public; its location (the street address) is in essence the public key. Anyone knowing the street address can go to the door and drop a written message through the slot; however, only the person who possesses the key can open the mailbox and read the message.
+
+Public/private key pairs are used for asymmetric encryption. Asymmetric encryption is used mainly to encrypt and decrypt session keys and digital signatures. Asymmetric encryption uses public key encryption algorithms.
+
+Public key algorithms use two different keys: a public key and a private key. The private key member of the pair must be kept private and secure. The public key, however, can be distributed to anyone who requests it. The public key of a key pair is often distributed by means of a digital certificate. When one key of a key pair is used to encrypt a message, the other key from that pair is required to decrypt the message. Thus if user A's public key is used to encrypt data, only user A (or someone who has access to user A's private key) can decrypt the data. If user A's private key is used to encrypt a piece of data, only user A's public key will decrypt the data, thus indicating that user A (or someone with access to user A's private key) did the encryption.
+
+If the private key is used to sign a message, the public key from that pair must be used to validate the signature. For example, if Tom wants to send someone a digitally signed message, she would sign the message with her private key, and the other person could verify her signature by using her public key. Because presumably only Tom has access to her private key, the fact that the signature can be verified with Tom's public key indicates that Tom created the signature.
+
+
+
+http://bsdsupport.org/q-how-do-i-use-openssl-to-encrypt-files/
+https://www.openssl.org/docs/manmaster/apps/enc.html
+
+symmetric:
+
+encrypt:
+openssl aes-256-cbc -salt -a -e -in plaintext.txt -out encrypted.txt
+
+decrypt:
+openssl aes-256-cbc -salt -a -d -in encrypted.txt -out plaintext.txt
+
+
+Asymmetric:
+
+# generate your private key and extract the public key
+openssl genrsa -des3 -out private.key 4096
+openssl -in private.key -pubout -out public.key
+
+# the second statement didnt work
+openssl genrsa -out private.key 4096
+openssl -in private.key -pubout -out public.key
+
+# this worked
+openssl genrsa -out private.key 4096
+openssl rsa -in private.key -pubout -out public.key
+
+encrypt:
+openssl rsautl -encrypt -pubin -inkey public.key -in plaintext.txt -out encrypted.txt
+
+decrypt:
+openssl rsautl -decrypt -inkey private.key -in encrypted.txt -out plaintext.txt
+
+
+# what is des3
+# what is cbc (in aes-256-cbc)
+
+
+https://sandilands.info/sgordon/demo-of-symmetric-key-encryption-using-openssl
+
+
+
+http://stackoverflow.com/questions/16056135/how-to-use-openssl-to-encrypt-decrypt-files
+
+
+Encrypt:
+openssl enc -in infile.txt -out encrypted.dat -e -aes256 -k symmetrickey
+
+Decrypt:
+openssl enc -in encrypted.dat -out outfile.txt -d -aes256 -k symmetrickey
+
+-- comment: To use a plaintext password, replace -k symmetrickey with -pass stdin or -pass 'pass:PASSWORD'
+enc ~> openssl enc -in plaintext.txt -out encrypted.dat -e -aes256 -pass 'pass:yodude'
+dec ~> openssl enc -in encrypted.dat -out outfile.txt -d -aes256 -pass 'pass:yodude'
+
+-- comment: Do not use the above command since there is no key derivation. Read more here: openssl weak key
+
+https://www.reddit.com/r/crypto/comments/4gu3df/weak_key_derivation_in_openssl/
+weak key derivation
+
+
+https://ruslanspivak.com/lsbaws-part3/
+http://stackoverflow.com/questions/918676/generate-sha-hash-in-c-using-openssl-library
+https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/
+
+# check out first section
+https://nodejs.org/api/tls.html
+
+Perfect Forward Secrecy
+Diffie Hellman key-agreement
+Elliptic Curve Diffie Hellman key-agreement
+
+google "creating a tls socket"
+
+https://en.wikipedia.org/wiki/Digital_signature
+https://en.wikipedia.org/wiki/Smart_card
+
+http://security.stackexchange.com/questions/8034/how-digital-signature-verification-process-works
+
