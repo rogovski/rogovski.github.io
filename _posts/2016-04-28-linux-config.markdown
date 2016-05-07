@@ -13,3 +13,5 @@ description: "links and sources"
 2. User-specific config is stored in the user's home directory, often as a hidden file, sometimes as a hidden directory containing non-hidden files (and possibly more subdirectories).
 
 Generally speaking, command line options will override environment variables which will override user defaults which will override system defaults.
+
+$ scp ~/script machine:/home/user
