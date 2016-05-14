@@ -1,0 +1,183 @@
+---
+layout: post
+title:  "SOC"
+date:   2016-05-12 13:14:00 -0500
+categories: soc
+description: "stream of consciousness"
+---
+
+http://blog.appliedinformaticsinc.com/how-to-write-spark-applications-in-python/
+
+$ spark-submit ../scripts/wc.py ../scripts/wcdata.txt
+
+```python
+## Imports
+
+from pyspark import SparkConf, SparkContext
+
+## CONSTANTS
+
+APP_NAME = "My Spark Application"
+
+##OTHER FUNCTIONS/CLASSES
+
+## Main functionality
+
+def main(sc):
+
+rdd = sc.parallelize(range(1000), 10)
+
+print rdd.mean()
+
+if __name__ == "__main__":
+    # Configure OPTIONS
+    conf = SparkConf().setAppName(APP_NAME)
+    conf = conf.setMaster("local[*]")
+    #in cluster this will be like
+    #"spark://ec2-0-17-03-078.compute-#1.amazonaws.com:7077"
+    sc   = SparkContext(conf=conf)
+    # Execute Main functionality
+    main(sc)
+```
+
+
+```python
+"""Calculates the word count of the given file.
+
+the file can be local or if you setup cluster.
+
+It can be hdfs file path"""
+
+## Imports
+
+from pyspark import SparkConf, SparkContext
+
+from operator import add
+import sys
+
+## Constants
+APP_NAME = " HelloWorld of Big Data"
+##OTHER FUNCTIONS/CLASSES
+
+def main(sc,filename):
+   textRDD = sc.textFile(filename)
+   words = textRDD.flatMap(lambda x: x.split(' ')).map(lambda x: (x, 1))
+   wordcount = words.reduceByKey(add).collect()
+   for wc in wordcount:
+      print wc[0],wc[1]
+
+if __name__ == "__main__":
+
+   # Configure Spark
+   conf = SparkConf().setAppName(APP_NAME)
+   conf = conf.setMaster("local[*]")
+   sc   = SparkContext(conf=conf)
+   filename = sys.argv[1]
+   # Execute Main functionality
+   main(sc, filename)
+```
+
+
+```python
+from pyspark import SparkConf, SparkContext
+from operator import add
+import sys
+
+# based on
+# SELECT SUM(salary)
+# FROM employees
+# WHERE salary > 1000
+# GROUP by deptname
+
+## Constants
+
+APP_NAME = " HelloWorld of Big Data"
+
+##OTHER FUNCTIONS/CLASSES
+
+## Main functionality
+
+def main(sc,filename):
+    rdd = sc.read.json(filename)
+    rdd_tranf_filter = rdd.filter(lambda l: l['salary']>
+10000).map(lambda l: (l['department'],l['salary']))
+    dpt_salary = rdd_tranf_filter.reduceByKey(add).collect()
+
+
+if __name__ == "__main__":
+    # Configure Spark
+    conf = SparkConf().setAppName(APP_NAME)
+    conf = conf.setMaster("local[*]")
+    sc   = SparkContext(conf=conf)
+    filename = sys.argv[1]
+    # Execute Main functionality
+    main(sc, filename)
+```
+
+
+
+https://github.com/stephenplusplus/jsonl
+
+http://www.surveystar.com/startips/jan2013.pdf
+
+-- "biased estimate of the variance of the source distribution"
+https://www.quora.com/Is-there-an-intuitive-explanation-for-the-difference-between-standard-deviation-and-sample-standard-deviation
+
+-- Michael Chernick: "The mean and variance are the natural parameters
+for a normal distribution."
+http://stats.stackexchange.com/questions/35123/whats-the-difference-between-variance-and-standard-deviation
+
+--  whuber: I would like to suggest that considerable insight into
+these questions can be had by replacing "variance" or "standard
+deviation" by some other (more familiar) quantity that plays an
+analogous role in quantitative description, such as length. When
+describing most physical objects, scientists will report a length.
+What does the length actually mean? What length is considered
+uncommonly large or small? Are there guidelines for assessing the
+magnitudes of lengths? If a length is 90 (or 30), is that uncommon or
+completely unremarkable?
+http://stats.stackexchange.com/questions/171535/what-does-the-size-of-the-standard-deviation-mean
+
+-- it looks like spark 1.6.1 works with json. the json file is not a
+'proper' json file, each line represents a json object.
+http://spark.apache.org/docs/latest/sql-programming-guide.html#json-datasets
+
+
+-- training = sqlContext.read.format("libsvm").load("data/mllib/sample_libsvm_data.txt")
+http://spark.apache.org/docs/latest/ml-classification-regression.html
+
+-- spark: dataframes vs RDDs
+
+-- fastfold spf13 bullshit
+https://github.com/spf13/spf13-vim/issues/274
+https://www.cheatography.com/dimitrios/cheat-sheets/vim-spf13/
+in .vimrc.local > set nofoldenable
+
+-- spf-13 autocomplete
+Ctrl+u and Tab
+
+-- Hive: Apache Hive supports analysis of large datasets stored in
+Hadoop's HDFS and compatible file systems such as Amazon S3
+filesystem. It provides an SQL-like language called HiveQL[6] with
+schema on read and transparently converts queries to MapReduce, Apache
+Tez[7] and Spark jobs. All three execution engines can run in Hadoop
+YARN.
+https://en.wikipedia.org/wiki/Apache_Hive
+
+http://www.tomsitpro.com/articles/hadoop-2-vs-1,2-718.html
+
+http://ercoppa.github.io/HadoopInternals/HadoopArchitectureOverview.html
+
+https://en.wikipedia.org/wiki/Apache_Hadoop
+
+
+https://en.wikipedia.org/wiki/Decision_tree_learning
+
+https://en.wikipedia.org/wiki/Ensemble_learning
+
+https://en.wikipedia.org/wiki/Gradient_boosting
+
+
+regularization: In general, a regularization term R(f) is introduced
+to a general loss function.
+https://en.wikipedia.org/wiki/Regularization_(mathematics)

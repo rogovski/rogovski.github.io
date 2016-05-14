@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "UBUNTU SERVER"
-date:   2016-04-24 13:14:00 -0500
+date:   2016-05-14 13:14:00 -0500
 categories: infrastructure
 description: "How to setup and configure"
 ---

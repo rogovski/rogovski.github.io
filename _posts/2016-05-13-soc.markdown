@@ -1,0 +1,155 @@
+---
+layout: post
+title:  "SOC"
+date:   2016-05-13 13:14:00 -0500
+categories: soc
+description: "stream of consciousness"
+---
+
+http://stackoverflow.com/questions/620604/difference-between-a-pointer-and-reference-parameter
+
+http://stackoverflow.com/questions/57483/what-are-the-differences-between-a-pointer-variable-and-a-reference-variable-in
+
+http://stackoverflow.com/questions/334856/are-there-benefits-of-passing-by-pointer-over-passing-by-reference-in-c/334944
+
+http://stackoverflow.com/questions/114180/pointer-vs-reference
+
+```python
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SQLContext
+from operator import add
+import sys
+
+# based on
+# SELECT SUM(salary)
+# FROM employees
+# WHERE salary > 1000
+# GROUP by deptname
+
+## Constants
+
+APP_NAME = " sql test"
+
+##OTHER FUNCTIONS/CLASSES
+
+## Main functionality
+
+def main(sc,filename):
+    sqlContext = SQLContext(sc)
+    datCtx = sqlContext.read.json(filename)
+    datCtx.registerTempTable("datTbl")
+    res = sqlContext.sql("SELECT department, SUM(salary) FROM datTbl
+WHERE salary > 1 GROUP by department")
+    res.show()
+
+if __name__ == "__main__":
+    # Configure Spark
+    conf = SparkConf().setAppName(APP_NAME)
+    conf = conf.setMaster("local[*]")
+    sc   = SparkContext(conf=conf)
+    filename = sys.argv[1]
+    # Execute Main functionality
+    main(sc, filename)
+```
+
+http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame
+
+spark OUTPUT?
+
+```python
+# simple
+sqlContext = SQLContext(sc)
+datCtx = sqlContext.read.json(filename)
+datCtx.collect()
+```
+
+```python
+# simple stats
+sqlContext = SQLContext(sc)
+datCtx = sqlContext.read.json(filename)
+datCtx.describe()
+
+>>> df.describe().show()
++-------+------------------+
+|summary|               age|
++-------+------------------+
+|  count|                 2|
+|   mean|               3.5|
+| stddev|2.1213203435596424|
+|    min|                 2|
+|    max|                 5|
++-------+------------------+
+>>> df.describe(['age', 'name']).show()
++-------+------------------+-----+
+|summary|               age| name|
++-------+------------------+-----+
+|  count|                 2|    2|
+|   mean|               3.5| null|
+| stddev|2.1213203435596424| null|
+|    min|                 2|Alice|
+|    max|                 5|  Bob|
++-------+------------------+-----+
+
+```
+
+https://www.usenix.org/legacy/publications/library/proceedings/osdi04/tech/full_papers/dean/dean_html/index.html
+
+get virtualbox on mac.
+get full networking up on vboxes.
+hdfs on vboxes.
+
+https://en.wikipedia.org/wiki/Positive-definite_matrix
+https://en.wikipedia.org/wiki/Symmetric_matrix
+
+
+```python
+import numpy as np
+
+# https://en.wikipedia.org/wiki/Positive-definite_matrix
+
+# symmetric matrix: a square matrix that is equal to its transpose.
+# Formally, matrix A is symmetric if A = A^T
+
+# Positive-definite matrix: a symmetric n × n real matrix M is said to be
+# positive definite if the scalar z^T M z is positive for every non-zero
+# column vector z of n real numbers.
+
+
+id2x2 = np.matrix([[1., 0.],
+                   [0., 1.]])
+
+m = np.matrix([[2., -1., 0.]
+               [-1., 2., -1.],
+               [0., -1., 2.]])
+```
+
+
+http://www.tutorialspoint.com/hadoop/hadoop_multi_node_cluster.htm
+http://www.allprogrammingtutorials.com/tutorials/setting-up-hadoop-2-6-0-cluster.php
+
+http://mesos.apache.org/
+
+https://databricks.com/blog/2014/01/21/spark-and-hadoop.html
+
+-- foreach RDD
+https://spark.apache.org/docs/0.9.1/streaming-programming-guide.html#output-operations
+-- foreach RDD (new)
+http://spark.apache.org/docs/latest/streaming-programming-guide.html#output-operations-on-dstreams
+
+-- it SEEMS possible to use python libs
+https://blog.cloudera.com/blog/2015/09/how-to-prepare-your-apache-hadoop-cluster-for-pyspark-jobs/
+
+
+learn how python uses packages from pip.
+learn how pip interacts with python.
+
+http://www.howtogeek.com/197934/how-to-change-your-hostname-computer-name-on-ubuntu-linux/
+
+Covariance gives you the interaction (or unscaled correlation) between
+different dimensions of data. i.e it will tell you if x is increasing,
+will y increase or decrease or remain unchanged.
+
+
+https://www.quora.com/Principal-Component-Analysis-What-is-the-intuitive-meaning-of-a-covariance-matrix
+
+https://www.quora.com/What-maths-do-I-need-to-learn-the-proof-that-all-functions-can-be-written-as-a-sum-of-sinusoids
