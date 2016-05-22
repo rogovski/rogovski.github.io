@@ -16,3 +16,5 @@ sudo nano /etc/ssh/sshd_config
 
 sudo systemctl restart ssh
 sudo shutdown -P now
+
+http://askubuntu.com/questions/64915/how-do-i-install-ubuntu-on-a-virtualbox-client-from-an-iso-image

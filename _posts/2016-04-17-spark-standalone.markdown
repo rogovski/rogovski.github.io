@@ -12,6 +12,11 @@ start the master
 ./sbin/start-master.sh
 ```
 
+this command starts the master service. it has two points of interaction
+that are relevent here - a web ui resource and a job uri. The web ui can be
+accessed at localhost:8080.
+
+
 start the slaves. limit each instance to 2 cores and 4G ram. create three instances.
 
 ```bash
