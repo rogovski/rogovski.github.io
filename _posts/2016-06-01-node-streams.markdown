@@ -82,4 +82,11 @@ TransformStream_ChunkByN.prototype._transform = function(chunk, encoding, callba
 
   callback();
 };
+
+// Usage
+var rs = new ReadStream();
+var trans = new TransformStream_ChunkByN(3);
+var ws = new WriteStream();
+
+rs.pipe(trans).pipe(ws);
 ```
