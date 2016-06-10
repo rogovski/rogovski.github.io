@@ -52,4 +52,7 @@ questions that I thought I'd try my hand at answering:
 20. Explain likely differences encountered between administrative datasets and datasets gathered from experimental studies. What are likely problems encountered with administrative data? How do experimental methods help alleviate these problems? What problems do they bring?
 
 
+## BLOGS
+[Glowing Python](http://glowingpython.blogspot.com)
+[Glowing Python - Convolution Post](http://glowingpython.blogspot.com/2012/02/convolution-with-numpy.html)
 
