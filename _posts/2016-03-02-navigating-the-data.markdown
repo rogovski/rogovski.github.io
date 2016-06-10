@@ -54,5 +54,8 @@ questions that I thought I'd try my hand at answering:
 
 ## BLOGS
 [Glowing Python](http://glowingpython.blogspot.com)
-[Glowing Python - Convolution Post](http://glowingpython.blogspot.com/2012/02/convolution-with-numpy.html)
+
+[ - Convolution](http://glowingpython.blogspot.com/2012/02/convolution-with-numpy.html)
+
+[ - Andrews Curves](http://glowingpython.blogspot.com/2014/10/andrews-curves.html)
 
