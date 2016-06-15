@@ -24,3 +24,6 @@ TODO:
 
 collection of coordinate systems in R^2
 
+Quote From HN:
+a real matrix corresponded to a linear transformation of that space via a rotation, a reflection, a stretching, a shearing, etc.
+
